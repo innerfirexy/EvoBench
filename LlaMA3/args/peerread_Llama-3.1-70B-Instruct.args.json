@@ -1,0 +1,19 @@
+{
+    "output_file": "exp_evolving_llms_1_2//peer/peerread_Llama-3.1-70B-Instruct",
+    "dataset": "peerread",
+    "n_samples": 500,
+    "openai_base": null,
+    "openai_key": null,
+    "openai_model": null,
+    "base_model_name": "Llama-3.1-70B-Instruct",
+    "batch_size": 50,
+    "do_top_k": false,
+    "top_k": 40,
+    "do_top_p": false,
+    "top_p": 0.96,
+    "do_temperature": false,
+    "temperature": 0.8,
+    "seed": 0,
+    "device": "cuda",
+    "cache_dir": "/mnt/hwfile/trustai/yuxiao"
+}
