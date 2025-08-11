@@ -111,5 +111,35 @@ def exp_claude_haiku():
                 f.write(' '.join(f'{nll:.5f}' for nll in nlls) + '\n')
 
 # %%
+def exp_claude_sonnet():
+    input_dir = '../Claude/Claude-Sonnet/'
+    
+    # 列出所有 JSON 文件（只检测第一级子路径）
+    json_files = []
+    for file in os.listdir(input_dir):
+        if file.endswith('.json'):
+            json_files.append(os.path.join(input_dir, file))
+    # print(f'Found {len(json_files)} JSON files')
+    
+    # Compute NLLs
+    output_dir = './Claude/Claude-Sonnet/'
+    os.makedirs(output_dir, exist_ok=True)
+    for json_file in tqdm(json_files):
+        human_nlls, model_nlls = compute_json_nll(json_file, tokenizer, model)
+        assert len(human_nlls) == len(model_nlls)
+        # save
+        basename = os.path.basename(json_file)
+        basename_prefix = basename.split('.')[0]
+        human_nlls_path = os.path.join(output_dir, f'{basename_prefix}_human.txt')
+        with open(human_nlls_path, 'w') as f:
+            for nlls in human_nlls:
+                f.write(' '.join(f'{nll:.5f}' for nll in nlls) + '\n')
+        model_nlls_path = os.path.join(output_dir, f'{basename_prefix}_model.txt')
+        with open(model_nlls_path, 'w') as f:
+            for nlls in model_nlls:
+                f.write(' '.join(f'{nll:.5f}' for nll in nlls) + '\n')
+
+# %%
 if __name__ == '__main__':
-    exp_claude_haiku()
+    # exp_claude_haiku()
+    exp_claude_sonnet()
