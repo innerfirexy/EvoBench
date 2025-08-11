@@ -68,13 +68,13 @@ def compute_json_nll(json_file: str, tokenizer, model):
     # key: original => human
     human_texts = data['original']
     human_nlls = []
-    for text in tqdm(human_texts, desc=f'Computing NLLs for human texts in {json_file}'):
+    for text in tqdm(human_texts, leave=False):
         nlls = text_to_nlls(text, tokenizer, model)
         human_nlls.append(nlls)
     # key: sampled => model
     model_texts = data['sampled']
     model_nlls = []
-    for text in tqdm(model_texts, desc=f'Computing NLLs for model texts in {json_file}'):
+    for text in tqdm(model_texts, leave=False):
         nlls = text_to_nlls(text, tokenizer, model)
         model_nlls.append(nlls)
 
@@ -83,7 +83,7 @@ def compute_json_nll(json_file: str, tokenizer, model):
 
 # %%
 def exp_claude_haiku():
-    input_dir = './Claude/Claude-Haiku/'
+    input_dir = '../Claude/Claude-Haiku/'
     
     # 列出所有 JSON 文件（只检测第一级子路径）
     json_files = []
@@ -93,7 +93,7 @@ def exp_claude_haiku():
     # print(f'Found {len(json_files)} JSON files')
     
     # Compute NLLs
-    output_dir = './llama3_nll/Claude/Claude-Haiku/'
+    output_dir = './Claude/Claude-Haiku/'
     os.makedirs(output_dir, exist_ok=True)
     for json_file in tqdm(json_files):
         human_nlls, model_nlls = compute_json_nll(json_file, tokenizer, model)
@@ -111,4 +111,5 @@ def exp_claude_haiku():
                 f.write(' '.join(f'{nll:.5f}' for nll in nlls) + '\n')
 
 # %%
-exp_claude_haiku()
+if __name__ == '__main__':
+    exp_claude_haiku()
