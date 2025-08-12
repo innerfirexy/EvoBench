@@ -1,6 +1,7 @@
 # %%
 import os
 import platform
+import socket
 import pickle
 import json
 from tqdm import tqdm
@@ -16,9 +17,10 @@ print('torch version:', torch.__version__)
 model_name = 'llama3-8b-instruct'
 if platform.system() == 'Darwin':
     model_path = f'/Users/xy/models/{model_name}'  # Please modify according to actual situation
-else:
+elif socket.gethostname() == 'l40-server':
+    model_path = f'/data1/model/{model_name}'  # Please modify according to actual situation
+elif socket.gethostname() == 'a5880-server':
     model_path = f'/data2/model/{model_name}'  # Please modify according to actual situation
-
 assert os.path.exists(model_path)
 
 tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=True)
