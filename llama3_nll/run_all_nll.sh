@@ -5,21 +5,21 @@
 
 echo "Starting NLL computation for all models..."
 
-# Claude (already done - commented out)
+# Claude 
 # echo "Running Claude NLL computation..."
 # python claude_nll.py
 
-# Gemini (already done - commented out)
-# echo "Running Gemini NLL computation..."
-# python gemini_nll.py
+# Gemini 
+echo "Running Gemini NLL computation..."
+python gemini_nll.py
 
 # GPT4
-echo "Running GPT4 NLL computation..."
-python gpt4_nll.py
+# echo "Running GPT4 NLL computation..."
+# python gpt4_nll.py
 
 # GPT4o
-echo "Running GPT4o NLL computation..."
-python gpt4o_nll.py
+# echo "Running GPT4o NLL computation..."
+# python gpt4o_nll.py
 
 # LlaMA3
 echo "Running LlaMA3 NLL computation..."

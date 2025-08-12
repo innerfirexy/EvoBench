@@ -102,7 +102,8 @@ def exp_gpt4o():
         assert len(human_nlls) == len(model_nlls)
         # save
         basename = os.path.basename(json_file)
-        basename_prefix = basename.split('.')[0]
+        # Remove .raw_data.json extension to get the full prefix including version info
+        basename_prefix = basename.replace('.raw_data.json', '')
         human_nlls_path = os.path.join(output_dir, f'{basename_prefix}_human.txt')
         with open(human_nlls_path, 'w') as f:
             for nlls in human_nlls:
